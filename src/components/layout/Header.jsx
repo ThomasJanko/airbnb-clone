@@ -6,7 +6,7 @@ import { Search, GlobeAlt, ViewList, UserCircle } from "heroicons-react";
 export default function Header() {
   return (
     <header className='sticky top-0 z-50 flex justify-between bg-white shadow-md p-3  md:px-10'>
-        <div className='relative flex items-center my-auto cursor-pointer ml-4'>
+        <div className='relative flex items-center my-auto cursor-pointer ml-6'>
             <Image src={AirbBnbLogo.src} width={100} height={100} alt='logo' />
         </div>
         <div className='flex items-center md:border-2 rounded-full py-2 md:shadow-sm w-1/3 ml-20'>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { GlobeAlt, Adjustments, AcademicCap, Archive, CubeTransparent,Hashtag } from "heroicons-react";
+import { GlobeAlt, Adjustments, AcademicCap, Archive, CubeTransparent,Hashtag, ChevronLeftOutline, ChevronRightOutline } from "heroicons-react";
 
 const categories = [
     {title: 'Piscine', icon: <GlobeAlt/>},
@@ -27,8 +27,8 @@ export default function BannerIcons() {
 
   return (
     <div className='flex mx-auto' style={{width: '88%'}}>
-        
-    <div className='mt-10 flex flex-row items-center opacity-70 overflow-x-scroll mx-auto hideScroll '>
+       <button className='mt-9 cursor-pointer'><ChevronLeftOutline className='border rounded-full p-1 h-7 w-7'/></button> 
+    <div className='mt-10 ml-1 flex flex-row items-center opacity-70 overflow-x-scroll mx-auto hideScroll '>
         {/* Créer Model Category [] et faire un map */}
         {categories && categories.map((categorie)=> 
         <div>
@@ -41,8 +41,8 @@ export default function BannerIcons() {
             </button>
         </div>
         )}
-        
     </div>
+    <button className='mt-9 ml-1 cursor-pointer'><ChevronRightOutline className='border rounded-full p-1 h-7 w-7'/></button> 
     <button className='flex rounded-xl border border-black border-opacity-60 p-2 h-12 items-center mt-10 ml-4'>
         <Adjustments/>
         Filtres
