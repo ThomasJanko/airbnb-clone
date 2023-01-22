@@ -2,7 +2,8 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Header from '../components/layout/Header'
-import BannerIcons from '../components/layout/BannerIcons'
+import BannerIcons from '../components/BannerIcons'
+import Places from '../components/places/Places'
 
 const Home: NextPage = () => {
   return (
@@ -14,6 +15,8 @@ const Home: NextPage = () => {
 
     <Header/>
     <BannerIcons/>
+    <Places/>
+    
     
     </div>
   )

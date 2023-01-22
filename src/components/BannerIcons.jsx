@@ -14,11 +14,11 @@ const categories = [
     {title: 'Wow !', icon: <Hashtag/>},
     {title: 'Campagne', icon: <GlobeAlt/>},
     {title: 'Chambres privées', icon: <AcademicCap/>},
-    {title: 'Chambres privées', icon: <GlobeAlt/>},
-    {title: 'Chambres privées', icon: <Archive/>},
-    {title: 'Chambres privées', icon: <AcademicCap/>},
-    {title: 'Chambres privées', icon: <CubeTransparent/>},
-    {title: 'Chambres privées', icon: <GlobeAlt/>},
+    {title: 'Cabanes', icon: <GlobeAlt/>},
+    {title: 'Tendance', icon: <Archive/>},
+    {title: 'Bateaux', icon: <AcademicCap/>},
+    {title: 'Design', icon: <CubeTransparent/>},
+    {title: 'Châteaux', icon: <GlobeAlt/>},
 ]
 
 export default function BannerIcons() {
