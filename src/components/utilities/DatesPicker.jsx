@@ -5,17 +5,25 @@ import { Calendar, DateRangePicker  } from 'react-date-range';
 
 export default function DatesPicker() {
 
-  const [startDate, setStartDtae] = useState(new Date())
+  const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
+  const [nbNights, setNbNights] = useState()
+
   const selectionRange = {startDate: startDate, endDate: endDate, key: 'selection'}
 
   const handleSelect = (ranges) => {
-    setStartDtae(ranges.selection.startDate);
+    
+    // console.log(ranges)
+    
+    setStartDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
-    console.log(ranges.selection)
+    let nb =  Math.round(ranges.selection.endDate - ranges.selection.startDate)
+
+    setNbNights((nb / (1000 * 60 * 60 * 24)))
   }
   return (
     <div className='flex flex-col mx-auto col-span-3' >
+      {nbNights}
         <DateRangePicker ranges={[selectionRange]} direction='vertical' minDate={new Date()} rangeColors={["#DF5B61"]} onChange={handleSelect}   />
     </div>
   )

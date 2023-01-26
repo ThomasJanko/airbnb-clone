@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Header from '../../../components/layout/Header'
 import { useRouter } from 'next/router';
 import PlaceService from '../../../public/services/places.service'
 import { ShareOutline, HeartOutline, Star, Translate, LocationMarkerOutline, CalendarOutline, ChevronDown } from "heroicons-react";
 import DatesPicker from '../../../components/utilities/DatesPicker'
-import './button.module.scss'
+
+
 
 
 const gradient = "linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%)";
@@ -14,19 +15,34 @@ export default function index() {
   const router = useRouter();
     const { id } = router.query;
 
+    const ref = useRef(null);
+
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [place, setPlace] = useState({})
+
+    const [select, setSelect] = useState(false)
 
 
     
     useEffect(() => {
       if(router.isReady){
           fetchData();
-
       }
   }, [router.isReady]);
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setSelect(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
 
 
 async function fetchData() {
@@ -121,7 +137,7 @@ async function fetchData() {
                 </div>
 
 
-              <div className='right ml-32 mt-8 w-full mt-4'>
+              <div className=' ml-32 mt-8 w-full sticky' style={{bot: '0'}}>
                 <div className='border  shadow-2xl w-5/6 rounded-xl p-6' >
                   <div className='flex justify-between'>
                     <div>  <span className='text-xl font-bold pt-2'>{place.pricePerDay} € </span> par nuit </div>
@@ -130,15 +146,16 @@ async function fetchData() {
                       <span className='underline ml-2 opacity-80 cursor-pointer'>  64 Commentaires</span>
                     </div>
                   </div>
-                  <div className='rounded-xl w-full mt-6'>
+                  <div className='rounded-xl w-full mt-6' ref={ref}>
+                    {select && <DatesPicker/>}
                     <div className='grid grid-cols-2 mx-auto'>
-                      <div className='uppercase border rounded-tl-xl p-2 flex flex-col '> 
+                      <div className='uppercase border rounded-tl-xl p-2 flex flex-col cursor-pointer' onClick={() => setSelect(!select)}> 
                         <span className='font-semibold'>Arrivée</span>
-                        <span>11/03/2004</span>
+                        <span>11/03/2023</span>
                        </div>
-                      <div className='uppercase border rounded-tr-xl p-2 flex flex-col '>
+                      <div className='uppercase border rounded-tr-xl p-2 flex flex-col cursor-pointer' onClick={() => setSelect(!select)} >
                         <span className='font-semibold'>Départ</span>
-                        <span>11/03/2004</span>
+                        <span>17/03/2023</span>
                       </div>
                     </div>
                     <div className='flex justify-between p-2 border rounded-bl-xl rounded-br-xl'>
@@ -150,11 +167,19 @@ async function fetchData() {
                     </div>
 
                   </div>
+
                   <button className='mt-4 w-full rounded-md h-12 reservation' style={{background: gradient}} type="text" >Réserver</button>
+                
+                  <div className='opacity-90 text-center mt-2'>Aucun montant ne vous sera débité pour le moment</div>
+
+                  <div className='w-full border-b-2 pb-4'>
+                    <div className='flex justify-between py-2 cursor-pointer'> <span className='underline'>145 € x 5 nuits</span> <span>723 €</span> </div>
+                    <div className='flex justify-between py-2 cursor-pointer'> <span className='underline'>Frais de service</span> <span>122 €</span> </div>
+                  </div>
+
+                  <div className='flex justify-between mt-3'> <span className='font-semibold'>Total</span> <span>845 €</span> </div>
                 </div>
               </div>
-                
-
               </div>
 
           </div>
