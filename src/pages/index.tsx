@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Header from '../components/layout/Header'
+import Footer from '../components/layout/Footer'
 import BannerIcons from '../components/BannerIcons'
 import Places from '../components/places/Places'
 
@@ -16,6 +17,7 @@ const Home: NextPage = () => {
     <Header/>
     <BannerIcons/>
     <Places/>
+    <Footer/>
     
     
     </div>
