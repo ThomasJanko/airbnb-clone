@@ -3,7 +3,8 @@ import PlaceCard from './PlaceCard'
 import PlaceService from '../../public/services/places.service'
 import Image from 'next/image';
 import { Star, HeartOutline, Map } from "heroicons-react";
-
+import Link from 'next/link';
+import Router from 'next/router';
 
 export default function Places() {
 
@@ -37,9 +38,9 @@ export default function Places() {
   return (
     <div className='mt-4 mx-auto' style={{width: '94%'}}>
         Places
-        <div className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 absolute  justify-around'>
+        <div className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 mt-40  justify-around cursor-pointer'>
             {places.map((place) => 
-            <div key={place._id} className='p-3'>
+            <div key={place._id} className='p-3' onClick={() => Router.push(`/places/${place._id}`)}>
                 <div className='rounded-xl' style={{height: '400px'}}>
                     <div>
                         {/* Allow all domain image in Next.config.js */}

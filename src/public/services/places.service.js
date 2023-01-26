@@ -24,5 +24,10 @@ export default{
        return axios.get(`${URL}/place/places`)
         .then(res=>res)
         .catch(err=>console.log(err))
+    },
+    getPlace(id){
+       return axios.get(`${URL}/place/place/${id}`)
+        .then(res=>res)
+        .catch(err=>console.log(err))
     }
 }

@@ -26,7 +26,7 @@ export default function BannerIcons() {
     const [category, setCategory] = useState('')
 
   return (
-    <div className='flex mx-auto sticky mt-4 z-10 bg-white w-full px-20' style={{height: '98px', contain: 'size', top:'76px'}}>
+    <div className='flex mx-auto shadow-white shadow-sm fixed mt-0 z-10 bg-white w-full px-20' style={{height: '98px', contain: 'size', top:'76px'}}>
        <button className='mt-6 cursor-pointer'><ChevronLeftOutline className='border rounded-full p-1 h-7 w-7'/></button> 
     <div className='mt-10 ml-1 flex flex-row items-center opacity-70 overflow-x-scroll mx-auto hideScroll '>
         {/* Créer Model Category [] et faire un map */}
