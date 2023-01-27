@@ -11,7 +11,7 @@ const gradient = "linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95
 
 export default function index() {
 
-  
+
   const { dates } = useContext(GlobalContext);
 
   const router = useRouter();
@@ -30,7 +30,6 @@ export default function index() {
     useEffect(() => {
       if(router.isReady){
           fetchData();
-          console.log(dates)
       }
   }, [router.isReady]);
 
@@ -153,11 +152,12 @@ async function fetchData() {
                     <div className='grid grid-cols-2 mx-auto'>
                       <div className='uppercase border rounded-tl-xl p-2 flex flex-col cursor-pointer' onClick={() => setSelect(!select)}> 
                         <span className='font-semibold'>Arrivée</span>
-                        <span>11/03/2023</span>
+                        <span> {dates && dates.startDate} </span>
+
                        </div>
                       <div className='uppercase border rounded-tr-xl p-2 flex flex-col cursor-pointer' onClick={() => setSelect(!select)} >
                         <span className='font-semibold'>Départ</span>
-                        <span>17/03/2023</span>
+                        <span> {dates && dates.endDate} </span>
                       </div>
                     </div>
                     <div className='flex justify-between p-2 border rounded-bl-xl rounded-br-xl'>
@@ -175,11 +175,11 @@ async function fetchData() {
                   <div className='opacity-90 text-center mt-2'>Aucun montant ne vous sera débité pour le moment</div>
 
                   <div className='w-full border-b-2 pb-4'>
-                    <div className='flex justify-between py-2 cursor-pointer'> <span className='underline'>145 € x 5 nuits</span> <span>723 €</span> </div>
+                    <div className='flex justify-between py-2 cursor-pointer'> <span className='underline'> {place.pricePerDay} € x {dates.nbNights} nuits</span> <span>{place.pricePerDay * dates.nbNights>0 && place.pricePerDay * dates.nbNights} €</span> </div>
                     <div className='flex justify-between py-2 cursor-pointer'> <span className='underline'>Frais de service</span> <span>122 €</span> </div>
                   </div>
 
-                  <div className='flex justify-between mt-3'> <span className='font-semibold'>Total</span> <span>845 €</span> </div>
+                  <div className='flex justify-between mt-3'> <span className='font-semibold'>Total</span> <span> {place.pricePerDay * dates.nbNights>0 && place.pricePerDay * dates.nbNights + 122} €</span> </div>
                 </div>
               </div>
               </div>

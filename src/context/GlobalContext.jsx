@@ -7,12 +7,19 @@ export default GlobalContext;
 
 export const GlobalContextProvider = ({ children }) => {
 
+  const formattedDate = new Date().toLocaleDateString("fr-FR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  });
   
   const [wishlist, setWishlist] = useState([]);
-  const [dates, setDate] = useState({startDate: '11/03/2001', endDate: '11/04/20023', nbNights: 7});
+  const [dates, setDate] = useState({startDate: formattedDate, endDate: formattedDate, nbNights: 0});
 
-
+const setDates = (date) => {
+  setDate(date)
   console.log(dates)
+}
   const removePlaceWishlist = (id) => {
     // ....
   }
@@ -33,7 +40,7 @@ export const GlobalContextProvider = ({ children }) => {
     deleteWishlist,
     wishlist,
     dates,
-    setDate,
+    setDates,
   }
 
   return (
