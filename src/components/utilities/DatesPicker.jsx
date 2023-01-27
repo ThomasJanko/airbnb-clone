@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css';
-import { Calendar, DateRangePicker  } from 'react-date-range';
+import { Calendar, DateRangePicker,   } from 'react-date-range';
 
 export default function DatesPicker() {
 
@@ -23,7 +23,7 @@ export default function DatesPicker() {
   }
   return (
     <div className='flex flex-col mx-auto col-span-3' >
-      {nbNights}
+      <span className='ml-4'>{nbNights>0 && nbNights + ' nuits'} </span> 
         <DateRangePicker ranges={[selectionRange]} direction='vertical' minDate={new Date()} rangeColors={["#DF5B61"]} onChange={handleSelect}   />
     </div>
   )

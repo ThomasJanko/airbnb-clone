@@ -1,16 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Header from '../../../components/layout/Header'
 import { useRouter } from 'next/router';
 import PlaceService from '../../../public/services/places.service'
 import { ShareOutline, HeartOutline, Star, Translate, LocationMarkerOutline, CalendarOutline, ChevronDown } from "heroicons-react";
 import DatesPicker from '../../../components/utilities/DatesPicker'
-
-
+import GlobalContext from '../../../context/GlobalContext';
 
 
 const gradient = "linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%)";
 
 export default function index() {
+
+  
+  const { dates } = useContext(GlobalContext);
 
   const router = useRouter();
     const { id } = router.query;
@@ -28,6 +30,7 @@ export default function index() {
     useEffect(() => {
       if(router.isReady){
           fetchData();
+          console.log(dates)
       }
   }, [router.isReady]);
 
@@ -69,7 +72,6 @@ async function fetchData() {
         <Header/>
         <div className='mt-28 w-full'>
           <div className='mx-auto' style={{width: '80%'}}>
-            
             <div className='mx-auto ' >
               <span className='text-2xl font-bold flex'> <Translate/> {place.title} </span>
               <div className='flex flex-row justify-between'>
