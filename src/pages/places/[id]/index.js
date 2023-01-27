@@ -6,10 +6,9 @@ import { ShareOutline, HeartOutline, Star, Translate, LocationMarkerOutline, Cal
 import DatesPicker from '../../../components/utilities/DatesPicker'
 import GlobalContext from '../../../context/GlobalContext';
 
-
 const gradient = "linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%)";
 
-export default function index() {
+const index = () => {
 
 
   const { dates } = useContext(GlobalContext);
@@ -190,3 +189,5 @@ async function fetchData() {
     </div>
   )
 }
+
+export default index;

@@ -3,19 +3,24 @@ import React, { useRef, useState, useEffect } from 'react'
 import AirbBnbLogo from '../../public/assets/airBnbLogo.png'
 import { Search, GlobeAlt, ViewList, UserCircle } from "heroicons-react";
 import DatesPicker from '../utilities/DatesPicker'
-import Link from 'next/link';
+import Link from 'next/link'; 
 
 export default function Header() {
 
     const [searchInput, setSearchInput] = useState('')
     const [select, setSelect] = useState(false)
+    const [accountMenu, setAccountMenu] = useState(false)
 
     const ref = useRef(null);
+    const refMenu = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
         setSelect(false)
+      }
+      if (refMenu.current && !refMenu.current.contains(event.target)) {
+        setAccountMenu(false)
       }
     }
 
@@ -44,9 +49,15 @@ export default function Header() {
            
             <button className='mx-2 p-1 cursor-pointer rounded-full hover:bg-opacity-20 hover:bg-gray-300'> <GlobeAlt /></button>
 
-            <div className='rounded-full flex border border-black p-1 mx-2 cursor-pointer hover:shadow-xl shadow-gray-400'>
+            <div className='rounded-full flex border border-black p-1 mx-2 cursor-pointer hover:shadow-xl shadow-gray-400' onClick={() => setAccountMenu(true)} ref={refMenu}>
                 <ViewList className='mx-1 h-8'/>
                 <UserCircle className='mx-1 text-gray-500 h-8 w-8' />
+            </div>
+            <div className='absolute'>
+            {accountMenu && 
+              <div className='transition-all'> 
+                Hello
+              </div>}
             </div>
         </div>
         
