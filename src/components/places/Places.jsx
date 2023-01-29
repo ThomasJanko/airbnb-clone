@@ -21,31 +21,26 @@ export default function Places() {
         fetchData();
     }, []);
 
-    // useEffect(() => {
-    //     const filteredPlaces = places.filter(place =>
-    //         place.title.toLowerCase().includes(search.toLowerCase()) ||  place.description.toLowerCase().includes(search.toLowerCase())
-    //     );
-    //   setList(filteredPlaces);
-
-    // }, [search]);
-
-    // useEffect(() => {
-    //   const filteredPlaces = places.filter(place =>
-    //     place.type.toLowerCase().includes(category.toLowerCase())
-    //   );
-    // setList(filteredPlaces);
-    // console.log(category)
-    // }, [category]);
 
     useEffect(() => {
-      const filteredPlaces = places.filter(place =>
+      let filteredPlaces = places;
+      if (category !== 'Tous') {
+      filteredPlaces = filteredPlaces.filter(place =>
+      place.type.toLowerCase().includes(category.toLowerCase())
+      );
+      }
+      
+      filteredPlaces = filteredPlaces.filter(place =>
       place.title.toLowerCase().includes(search.toLowerCase()) ||
       place.description.toLowerCase().includes(search.toLowerCase())
-      ).filter(place =>
-      place.type.toLowerCase().includes(category.toLowerCase())
       );
       setList(filteredPlaces);
       }, [search, category]);
+      
+      
+      
+      
+      
 
   async function fetchData() {
     try {

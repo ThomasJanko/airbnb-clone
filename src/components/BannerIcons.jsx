@@ -3,6 +3,7 @@ import { GlobeAlt, Adjustments, AcademicCap, Archive, CubeTransparent,Hashtag, C
 import GlobalContext from '../context/GlobalContext';
 
 const categoriesList = [
+    {title: 'Tous', icon: <AcademicCap/>},
     {title: 'Maison', icon: <GlobeAlt/>},
     {title: 'Picscine', icon: <Archive/>},
     {title: 'Appartement', icon: <AcademicCap/>},
