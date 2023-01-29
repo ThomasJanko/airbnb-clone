@@ -51,7 +51,7 @@ export default function Places() {
     <div className='mt-4 mx-auto' style={{width: '94%'}}>
         
         <div className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 mt-44 justify-around cursor-pointer'>
-            {list && list.map((place) => 
+            {list.length>0 ? list.map((place) => 
             <div key={place._id} className='p-3' onClick={() => Router.push(`/places/${place._id}`)}>
                 <div className='rounded-xl' style={{height: '400px'}}>
                     <div>
@@ -74,7 +74,11 @@ export default function Places() {
 
                 </div>
             </div>
-            )}
+            )
+          :
+          <div className='absolute text-2xl text-center mt-10' style={{width: '94%'}}>
+            <span className='mx-auto'> Aucune location disponible !</span>
+          </div>}
         </div>
         <div className='fixed bottom-20 w-full mx-auto z-50 whitespace-nowrap pointer-events-auto'>
             <button className='rounded-full py-3 px-4 mx-auto flex font-semibold text-white hover:scale-105 transition-all' style={{background: '#222222'}}>Afficher la carte {/* Affciher la list <List/> */}  <Map className='ml-1'/> </button>
