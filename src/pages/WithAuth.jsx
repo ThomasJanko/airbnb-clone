@@ -7,10 +7,12 @@ const WithAuth = (WrappedComponent) => {
     const router = useRouter()
     const [isLogged, setisLogged] = useState(false)
     useEffect(() => {
+
+        //Api creer router verify Token => renvoie si le token en parametre est valide
         let token = localStorage.getItem('token')
         if(!token){
             setisLogged(false)
-            router.push('/login')
+            router.push('/auth/login')
         }
         else{
             setisLogged(true)

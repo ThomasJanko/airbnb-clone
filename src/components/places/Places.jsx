@@ -1,21 +1,32 @@
-import React, {useState, useEffect } from 'react'
+import React, {useState, useEffect, useContext } from 'react'
 import PlaceCard from './PlaceCard'
 import PlaceService from '../../public/services/places.service'
 import Image from 'next/image';
 import { Star, HeartOutline, Map } from "heroicons-react";
 import Link from 'next/link';
 import Router from 'next/router';
+import GlobalContext from '../../context/GlobalContext';
 
 export default function Places() {
+
+    const {search} = useContext(GlobalContext)
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState();
 
+    const [list, setList] = useState([])
     const [places, setPlaces] = useState([])
 
     useEffect(() => {
         fetchData();
-  }, []);
+    }, []);
+
+    useEffect(() => {
+      const filteredPlaces = places.filter(place =>
+        place.title.toLowerCase().includes(search.toLowerCase()) ||  place.description.toLowerCase().includes(search.toLowerCase())
+      );
+    setList(filteredPlaces);
+    }, [search]);
 
   async function fetchData() {
     try {
@@ -35,11 +46,12 @@ export default function Places() {
   if (error) {
     return <p>Error: {error.message}</p>;
   }
+
   return (
     <div className='mt-4 mx-auto' style={{width: '94%'}}>
-        Places
-        <div className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 mt-40  justify-around cursor-pointer'>
-            {places.map((place) => 
+        
+        <div className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 mt-44 justify-around cursor-pointer'>
+            {list && list.map((place) => 
             <div key={place._id} className='p-3' onClick={() => Router.push(`/places/${place._id}`)}>
                 <div className='rounded-xl' style={{height: '400px'}}>
                     <div>

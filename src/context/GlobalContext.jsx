@@ -15,11 +15,17 @@ export const GlobalContextProvider = ({ children }) => {
   
   const [wishlist, setWishlist] = useState([]);
   const [dates, setDate] = useState({startDate: formattedDate, endDate: formattedDate, nbNights: 0});
+  const [search, setSearch] = useState('');
 
-const setDates = (date) => {
-  setDate(date)
-  console.log(dates)
-}
+  const handleSearch = (input) =>{
+      setSearch(input);
+      console.log(input)
+  }
+
+  const setDates = (date) => {
+    setDate(date)
+  }
+
   const removePlaceWishlist = (id) => {
     // ....
   }
@@ -40,7 +46,10 @@ const setDates = (date) => {
     deleteWishlist,
     wishlist,
     dates,
+    search,
     setDates,
+    setSearch,
+    handleSearch
   }
 
   return (
