@@ -9,7 +9,7 @@ import GlobalContext from '../../context/GlobalContext';
 
 export default function Places() {
 
-    const {search} = useContext(GlobalContext)
+    const {search, category} = useContext(GlobalContext)
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState();
@@ -21,17 +21,37 @@ export default function Places() {
         fetchData();
     }, []);
 
+    // useEffect(() => {
+    //     const filteredPlaces = places.filter(place =>
+    //         place.title.toLowerCase().includes(search.toLowerCase()) ||  place.description.toLowerCase().includes(search.toLowerCase())
+    //     );
+    //   setList(filteredPlaces);
+
+    // }, [search]);
+
+    // useEffect(() => {
+    //   const filteredPlaces = places.filter(place =>
+    //     place.type.toLowerCase().includes(category.toLowerCase())
+    //   );
+    // setList(filteredPlaces);
+    // console.log(category)
+    // }, [category]);
+
     useEffect(() => {
       const filteredPlaces = places.filter(place =>
-        place.title.toLowerCase().includes(search.toLowerCase()) ||  place.description.toLowerCase().includes(search.toLowerCase())
+      place.title.toLowerCase().includes(search.toLowerCase()) ||
+      place.description.toLowerCase().includes(search.toLowerCase())
+      ).filter(place =>
+      place.type.toLowerCase().includes(category.toLowerCase())
       );
-    setList(filteredPlaces);
-    }, [search]);
+      setList(filteredPlaces);
+      }, [search, category]);
 
   async function fetchData() {
     try {
       const response = await PlaceService.getPlaces();
       setPlaces(response.data);
+      setList(response.data)
     } catch (error) {
       setError(error);
     } finally {

@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { GlobeAlt, Adjustments, AcademicCap, Archive, CubeTransparent,Hashtag, ChevronLeftOutline, ChevronRightOutline } from "heroicons-react";
+import GlobalContext from '../context/GlobalContext';
 
-const categories = [
-    {title: 'Piscine', icon: <GlobeAlt/>},
-    {title: 'Bord de mer', icon: <Archive/>},
-    {title: 'Avec vue', icon: <AcademicCap/>},
-    {title: 'Vignoble', icon: <CubeTransparent/>},
+const categoriesList = [
+    {title: 'Maison', icon: <GlobeAlt/>},
+    {title: 'Picscine', icon: <Archive/>},
+    {title: 'Appartement', icon: <AcademicCap/>},
+    {title: 'Location', icon: <CubeTransparent/>},
     {title: "Sur l'eau", icon: <Hashtag/>},
     {title: 'Au pied des pistes', icon: <GlobeAlt/>},
     {title: 'Luxe', icon: <GlobeAlt/>},
@@ -14,7 +15,7 @@ const categories = [
     {title: 'Wow !', icon: <Hashtag/>},
     {title: 'Campagne', icon: <GlobeAlt/>},
     {title: 'Chambres privées', icon: <AcademicCap/>},
-    {title: 'Cabanes', icon: <GlobeAlt/>},
+    {title: 'Cabane', icon: <GlobeAlt/>},
     {title: 'Tendance', icon: <Archive/>},
     {title: 'Bateaux', icon: <AcademicCap/>},
     {title: 'Design', icon: <CubeTransparent/>},
@@ -23,19 +24,18 @@ const categories = [
 
 export default function BannerIcons() {
 
-    const [category, setCategory] = useState('')
+    const {category, setCategories} = useContext(GlobalContext)
 
   return (
-    <div className='flex mx-auto shadow-white shadow-sm fixed mt-0 z-10 bg-white w-full px-20' style={{height: '98px', contain: 'size', top:'76px'}}>
+    <div className='flex mx-auto shadow-white shadow-sm fixed mt-auto z-10 bg-white w-full px-20' style={{height: '98px', contain: 'size', top:'76px'}}>
        <button className='mt-6 cursor-pointer'><ChevronLeftOutline className='border rounded-full p-1 h-7 w-7'/></button> 
     <div className='mt-10 ml-1 flex flex-row items-center opacity-70 overflow-x-scroll mx-auto hideScroll '>
         {/* Créer Model Category [] et faire un map */}
-        {categories && categories.map((categorie)=> 
+        {categoriesList && categoriesList.map((categorie)=> 
         <div>
             <button 
             className={`items-center w-full text-center justify-center whitespace-nowrap mx-4 flex flex-col h-auto opacity-90 hover:opacity-100  transition-all hover:text-black font-semibold text-xs hover:shadow-md hover:border-b-2 pb-1  ${category == categorie.title? 'border-b-2 border-black font-bold text-black': 'hover:border-gray-400'}`}
-            onClick={() => setCategory(categorie.title)}>
-                {/* <GlobeAlt/>  */}
+            onClick={() => setCategories(categorie.title)}>
                 {categorie.icon}
                 {categorie.title}
             </button>
