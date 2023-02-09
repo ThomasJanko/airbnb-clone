@@ -10,7 +10,6 @@ export default function Header() {
 
     const { search, handleSearch, setSearch } = useContext(GlobalContext);
 
-    const [searchInput, setSearchInput] = useState('')
     const [select, setSelect] = useState(false)
     const [accountMenu, setAccountMenu] = useState(false)
 

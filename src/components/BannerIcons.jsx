@@ -42,6 +42,12 @@ export default function BannerIcons() {
         };
       }, [ref]);
 
+      const removeAllFilters = () => {
+        setFilterPrice({...filterPrice, min: 0, max: 9999})
+        setFilterCapacity({...filterCapacity, min: 0, max: 100})
+        setCategories('Tous')
+      }
+
   return (
     <div className='flex mx-auto shadow-white shadow-sm fixed mt-auto z-10 bg-white w-full px-20' style={{height: '98px', contain: 'size', top:'76px'}}>
        <button className='mt-6 cursor-pointer'><ChevronLeftOutline className='border rounded-full p-1 h-7 w-7'/></button> 
@@ -105,6 +111,7 @@ export default function BannerIcons() {
                     </div>
                 </div>
             </div>
+            <span className='font-semibold underline cursor-pointer' onClick={removeAllFilters}>Tout effacer</span>
         </div>
     }
     </div>
