@@ -9,7 +9,7 @@ import GlobalContext from '../../context/GlobalContext';
 
 export default function Places() {
 
-    const {search, category} = useContext(GlobalContext)
+    const {search, category, filterPrice, filterCapacity} = useContext(GlobalContext)
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState();
@@ -34,8 +34,16 @@ export default function Places() {
       place.title.toLowerCase().includes(search.toLowerCase()) ||
       place.description.toLowerCase().includes(search.toLowerCase())
       );
+
+      filteredPlaces = filteredPlaces.filter(place =>
+        place.pricePerDay >= filterPrice.min && place.pricePerDay <= filterPrice.max
+      );
+
+      filteredPlaces = filteredPlaces.filter(place =>
+        place.capacity >= filterCapacity.min && place.capacity <= filterCapacity.max
+      );
       setList(filteredPlaces);
-      }, [search, category]);
+      }, [search, category, filterPrice, filterCapacity]);
       
       
       

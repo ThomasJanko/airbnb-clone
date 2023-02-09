@@ -71,17 +71,17 @@ async function fetchData() {
         <div className='mt-28 w-full'>
           <div className='mx-auto' style={{width: '80%'}}>
             <div className='mx-auto ' >
-              <span className='text-2xl font-bold flex'> <Translate/> {place.title} </span>
+              <span className='text-2xl font-bold flex'> <Translate/> <span className='capitalize-first'>{place.title}</span>  </span>
               <div className='flex flex-row justify-between'>
                 <div className='flex mt-2'>
                   <span className='flex font-semibold'> <Star/> 4,6 ·</span>
-                  <span className='font-semibold ml-1 underline'> 64 Commentaires</span>
+                  <span className='font-semibold ml-1 underline cursor-pointer'> 64 Commentaires</span>
                   <span className='flex'> · ! Superhost · </span>
-                  <span className='ml-2 font-semibold underline '> Tremosine sul Garda, Brescia, Italie</span>
+                  <span className='ml-2 font-semibold underline cursor-pointer'> Tremosine sul Garda, Brescia, Italie</span>
                 </div>
                 <div className='flex'>
-                  <span className='mx-4 flex'> <ShareOutline/> Partager</span>
-                  <span className='mx-4 flex'> <HeartOutline/> Enregistrer</span>
+                  <span className='mx-4 flex cursor-pointer'> <ShareOutline/> Partager</span>
+                  <span className='mx-4 flex cursor-pointer'> <HeartOutline/> Enregistrer</span>
                 </div>
               </div>
             </div>
@@ -101,7 +101,7 @@ async function fetchData() {
                   <div className='mt-6 flex justify-between border-b-2 pb-8' >
                     <div className='flex flex-col'>
                       <span className='font-semibold text-2xl'>{place.description} </span>
-                      <span>3 voyageurs · 1 chambre · 2 lits · 1 salle de bain</span>
+                      <span> {place.capacity && place.capacity} voyageurs · 1 chambre · 2 lits · 1 salle de bain</span>
                     </div>
                     <div className=' align-middle items-center'>
                       <img className='rounded-full h-14 w-14 object-cover ' width={60} height={60} src="https://a0.muscache.com/im/pictures/user/f8f6ecdd-c65a-4d0c-ace4-0f3f8c337209.jpg?im_w=240" alt="hote avatar"/>
@@ -110,7 +110,7 @@ async function fetchData() {
 
                   <div className='border-b-2 pb-6 mt-8'>
                     <div className='flex flex-col my-4'>
-                      <span className='text-lg font-semibold flex'> <HeartOutline className='mr-2'/> Mara est Superhôte</span>
+                      <span className='text-lg font-semibold flex'> <HeartOutline className='mr-2 '/> <span className='capitalize-first'>{place.owner.firstName} est Superhôte</span></span>
                       <span className='ml-8'>Les Superhôtes sont des hôtes expérimentés qui bénéficient de très bonnes évaluations et qui s'engagent à offrir d'excellents séjours aux voyageurs.</span>
                     </div>
                     <div className='flex flex-col my-4'>

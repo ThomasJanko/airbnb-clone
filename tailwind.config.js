@@ -20,8 +20,15 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#ff385c',
+        secondary: '#1c1e1f',
+        utilities: '#565758',
+        
+      },
   },
+},
   plugins: [capitalizeFirst],
 }
 

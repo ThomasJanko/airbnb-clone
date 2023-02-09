@@ -17,6 +17,8 @@ export const GlobalContextProvider = ({ children }) => {
   const [dates, setDate] = useState({startDate: formattedDate, endDate: formattedDate, nbNights: 0});
   const [search, setSearch] = useState('');
   const [category, setCategories] = useState('')
+  const [filterPrice, setFilterPrice] = useState({min: 0, max: 9999})
+  const [filterCapacity, setFilterCapacity] = useState({min: 0, max: 100})
 
   const handleSearch = (input) =>{
       setSearch(input);
@@ -45,14 +47,18 @@ export const GlobalContextProvider = ({ children }) => {
     removePlaceWishlist,
     addPlaceWishlist,
     deleteWishlist,
-    setDates,
-    setSearch,
     handleSearch,
-    setCategories,
     wishlist,
     dates,
+    setDates,
     search,
+    setSearch,
     category,
+    setCategories,
+    filterPrice,
+    setFilterPrice,
+    filterCapacity,
+    setFilterCapacity
   }
 
   return (
