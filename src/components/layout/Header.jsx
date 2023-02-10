@@ -52,8 +52,9 @@ export default function Header() {
         </div>
 
         <div className='flex items-center'>
+           <Link href={'/places/addplace'}>
             <button className='mx-2 cursor-pointer p-1 rounded-full hover:bg-opacity-20 hover:bg-gray-300'>Mettre mon logement sur Airbnb  {/* ||Mode hôte */}</button> 
-           
+           </Link>
             <button className='mx-2 p-1 cursor-pointer rounded-full hover:bg-opacity-20 hover:bg-gray-300'> <GlobeAlt /></button>
 
             <div className='rounded-full flex border border-black p-1 mx-2 cursor-pointer hover:shadow-xl shadow-gray-400 mr-4' onClick={() => setAccountMenu(!accountMenu)} ref={refMenu}>

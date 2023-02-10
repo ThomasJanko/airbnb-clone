@@ -54,7 +54,7 @@ export default function BannerIcons() {
     <div className='mt-10 ml-1 flex flex-row items-center opacity-70 overflow-x-scroll mx-auto hideScroll '>
         {/* Créer Model Category [] et faire un map */}
         {categoriesList && categoriesList.map((categorie)=> 
-        <div>
+        <div key={categorie.title}>
             <button 
             className={`items-center w-full text-center justify-center whitespace-nowrap mx-4 flex flex-col h-auto opacity-90 hover:opacity-100  transition-all hover:text-black font-semibold text-xs hover:shadow-md hover:border-b-2 pb-1  ${category == categorie.title? 'border-b-2 border-black font-bold text-black': 'hover:border-gray-400'}`}
             onClick={() => setCategories(categorie.title)}>

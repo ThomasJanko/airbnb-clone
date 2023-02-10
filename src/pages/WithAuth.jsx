@@ -9,7 +9,7 @@ const WithAuth = (WrappedComponent) => {
     useEffect(() => {
 
         //Api creer router verify Token => renvoie si le token en parametre est valide
-        let token = localStorage.getItem('token')
+        let token = localStorage.getItem('Auth')
         if(!token){
             setisLogged(false)
             router.push('/auth/login')

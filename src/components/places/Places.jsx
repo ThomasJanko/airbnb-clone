@@ -25,9 +25,13 @@ export default function Places() {
     useEffect(() => {
       let filteredPlaces = places;
       if (category !== 'Tous') {
-      filteredPlaces = filteredPlaces.filter(place =>
-      place.type.toLowerCase().includes(category.toLowerCase())
-      );
+        filteredPlaces.forEach((place) => {
+          place.type.forEach((type) => {
+            if (!type.toLowerCase().includes(category.toLowerCase())) {
+              filteredPlaces = filteredPlaces.filter(p => p !== place);
+            }
+          });
+        });
       }
       
       filteredPlaces = filteredPlaces.filter(place =>
