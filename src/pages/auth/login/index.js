@@ -2,7 +2,9 @@ import React, { createContext, useContext, useState } from 'react'
 import AuthService from '../../../public/services/auth.service'
 // import Alert from '../Utilities/Alert'
 import { useRouter } from 'next/router';
-
+import Link from 'next/link'
+import AirbBnbLogo from '../../../public/assets/airBnbLogo.png'
+import Image from 'next/image'
 
 
 const Index = () => {
@@ -54,26 +56,32 @@ const Index = () => {
     }
   return (
     <div className='mx-auto  '>
+        {/* <Link href={'/'}>
+            <span className='absolute top-20 left-40 underline cursor-pointer'> Accueil </span>
+        </Link> */}
+         <Link href={'/'} className='absolute top-20 left-40'>
+            <Image src={AirbBnbLogo.src} width={100} height={100} alt='logo' />
+          </Link>
         <h2 className='title font-bold mt-32 text-center text-primary text-2xl'>Connexion</h2>
         <div className='bg-transparent mx-auto border rounded-2xl mt-4 card shadow-md elevation-2' style={{width: '40%', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'}}>
          <div className='mx-8 mt-4 flex-col '>
-            <label className='block text-secondary text-sm font-bold mt-2' htmlFor="email">EMAIL :</label><br/>
-            <input className='shadow appearance-none border rounded w-full p-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' value={email} type="email" onChange={(e) => setEmail(e.target.value)} /><br/>
+            <label className='block text-secondary text-sm font-bold mt-4' htmlFor="email">EMAIL :</label>
+            <input className='shadow appearance-none border rounded w-full mt-2 p-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline' value={email} type="email" placeholder='user@user.com' onChange={(e) => setEmail(e.target.value)} /><br/>
             
-            <label className='block text-secondary text-sm font-bold mt-2' htmlFor="password">PASSWORD :</label><br/>
-            <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' value={password} type="password" onKeyDown={(e) => e.key==='Enter' && handleForm()}  onChange={(e) => setPasssword(e.target.value)} /><br/>
+            <label className='block text-secondary text-sm font-bold mt-4' htmlFor="password">MOT DE PASSE :</label>
+            <input className='shadow appearance-none border rounded w-full mt-2 py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline' value={password} type="password" placeholder='user1234' onKeyDown={(e) => e.key==='Enter' && handleForm()}  onChange={(e) => setPasssword(e.target.value)} /><br/>
 
             <div className='flex justify-center'>
-                <button className='mt-4 text-center mx-auto bg-primary hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={() => handleForm()}> Login </button>
+                <button className='mt-4 text-center mx-auto bg-primary hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={() => handleForm()}> Valider </button>
             </div>
 
-            <div className='flex justify-between'>
+            <div className='flex justify-between mt-2'>
                     <a className="inline-block align-baseline font-bold text-sm text-primary cursor-pointer hover:text-red-700 pb-2" href="/auth/register">
-                        Register
+                        Inscription
                     </a>
                 
                 <a className="inline-block align-baseline font-bold text-sm text-primary cursor-pointer hover:text-red-700 pb-2">
-                    Forgot Password?
+                    Mot de passe oublié ?
                 </a>
             </div>
          </div>
