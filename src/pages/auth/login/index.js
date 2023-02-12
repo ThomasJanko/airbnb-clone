@@ -32,7 +32,6 @@ const Index = () => {
                   setAlert('success')
                   setEmail('')
                   setPasssword('')
-                  // setUser(res.data.user)
                    localStorage.setItem('Auth', JSON.stringify(res.data))
                 //    login();
                    router.push('/');
