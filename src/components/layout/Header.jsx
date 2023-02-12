@@ -19,7 +19,6 @@ export default function Header() {
     const refMenu = useRef(null);
 
   useEffect(() => {
-    console.log(currentUser)
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
         setSelect(false)
