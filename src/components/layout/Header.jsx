@@ -53,7 +53,7 @@ export default function Header() {
 
         <div className='flex items-center'>
            <Link href={'/places/addplace'}>
-            <button className='mx-2 cursor-pointer p-1 rounded-full hover:bg-opacity-20 hover:bg-gray-300'>Mettre mon logement sur Airbnb  {/* ||Mode hôte */}</button> 
+            <button className='mx-2 cursor-pointer p-1 rounded-full hover:bg-opacity-20 hover:bg-gray-300 h-8 text-ellipsis overflow-hidden'>Mettre mon logement sur Airbnb  {/* ||Mode hôte */}</button> 
            </Link>
             <button className='mx-2 p-1 cursor-pointer rounded-full hover:bg-opacity-20 hover:bg-gray-300'> <GlobeAlt /></button>
 

@@ -28,7 +28,8 @@ const categoriesList = [
 
 const addPlace = () => {
 
-    // const router = useRouter();
+    const router = useRouter();
+    const [message, setMessage] = useState('')
     
 
   const [place, setPlace] = useState({
@@ -61,11 +62,15 @@ const addPlace = () => {
     // console.log(place);
     placesService.addPlace(place, jwt)
     .then((res) => {
-        console.log(res)
-        // router.push('/places')
+      if(res && res.code != 'ERR_BAD_RESPONSE'){
+        router.push('/')
+      }
+        else{
+          setMessage(res.response.data.message)
+        }
     })
     .catch((errors) => {
-        console.log(errors)
+        setMessage(errors)
     })
   };
  
@@ -138,7 +143,7 @@ const addPlace = () => {
     <div className="mb-4 flex justify-evenly">
         <div>
         <label className="block text-secondary italic font-semibold mb-2" htmlFor="pricePerDay">
-          Price per day
+          Prix / jour
         </label>
         <input
           className={`border border-gray-400 p-2 rounded w-full`}
@@ -149,11 +154,11 @@ const addPlace = () => {
           max={9999}
           onChange={(e) => setPlace({...place,pricePerDay:e.target.value})}
           value={place.pricePerDay}
-        />
+        /> 
         </div>
         <div>
         <label className="block font-semibold text-secondary italic mb-2" htmlFor="capcity">
-          Capacity
+          Nombre de personnes
         </label>
         <input
           className={`border border-gray-400 p-2 rounded w-full`}
@@ -268,6 +273,11 @@ const addPlace = () => {
             Valider
             </button>
         </div>
+        {message && 
+          <div className='p-2 w-3/4 mt-4 bg-red-600 rounded-md mx-auto text-center relative' >
+            {message} <span className='cursor-pointer absolute top-1 right-1 font-bold text-xl' onClick={() => setMessage('')}>X</span>
+          </div> 
+        }
     </form>
   )
 }

@@ -6,7 +6,7 @@ const Index = () => {
     return (
         <div className='w-full'>
             <Header/>
-            <div className='mt-32 xl:w-1/2 md:w-1/2 sm:w-3/4 sm:mt-40 mx-auto'>
+            <div className='mt-32 xl:w-1/2 md:w-3/4 sm:w-3/4 sm:mt-40 mx-auto'>
                 <AddPlace/>
             </div>
         </div>

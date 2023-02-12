@@ -75,7 +75,7 @@ export default function Places() {
   }
 
   return (
-    <div className='mt-4 mx-auto' style={{width: '94%'}}>
+    <div className='my-4 mx-auto' style={{width: '94%'}}>
         
         <div className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 mt-44 justify-around cursor-pointer'>
             {list.length>0 ? list.map((place) => 
