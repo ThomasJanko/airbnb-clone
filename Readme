@@ -1,0 +1,24 @@
+Compte - Propriétaire (owner) :
+
+
+> Consulter et modifier mon profil
+> Consulter uniquement ses annonces
+> Modifier, supprimer une annonce
+> Consulter les demandes de réservation pour chaque annonce
+> Accepter ou refuser une demande de réservation
+
+Compte - Loueur (customer) :
+> Consulter et modifier mon profil
+> je peux faire une demande de réservation pour un lieu en renseignant une date de début et de fin
+> Ajouter des lieux dans sa liste de favoris
+
+Back office :
+> Prévoir un back office pour les utilisateurs de type admin
+> Je peux consulter la liste de tous les utilisateurs
+> Je peux consulter toutes les demandes de réservation
+
+Bonus :
+> Option d’affichage des annonces sur une google map
+> Paiement (stripe ? )
+> Email de notification : reset password, confirmation de réservation etc…
+> Toutes fonctionnalités supplémentaires en plus de ce qui est demandé

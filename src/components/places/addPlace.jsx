@@ -102,7 +102,7 @@ const addPlace = () => {
           Type
         </label>
         <select
-          className={`border border-gray-400 p-2 rounded w-5/6  `}
+          className={`border border-gray-400 p-2 rounded w-5/6 h-60 `}
           type="text"
           placeholder='Maison'
           name="type"

@@ -5,18 +5,18 @@ import { useRouter } from 'next/router';
 import Link from 'next/link'
 import AirbBnbLogo from '../../../public/assets/airBnbLogo.png'
 import Image from 'next/image'
+import AuthContext from '../../../context/AuthContext'
 
 
 const Index = () => {
     
-    // const {login} = useAuth()
+    const {login, currentUser} = useContext(AuthContext)
     const router = useRouter();
 
     const [email, setEmail] = useState('')
     const [password, setPasssword] = useState('')
     const [message, setMessage] = useState('')
 
-    const [alert, setAlert] = useState('')
 
 
     const handleForm = () => {
@@ -28,28 +28,26 @@ const Index = () => {
         if(form.email && form.password){
             AuthService.login(form)
             .then((res) => {
-                if(res){
-                  setAlert('success')
+                console.log(res)
+                // if(res && res.status == 200){
+                if(res && res.code != 'ERR_BAD_RESPONSE'){
                   setEmail('')
                   setPasssword('')
                    localStorage.setItem('Auth', JSON.stringify(res.data))
-                //    login();
+                   login(res.data);
                    router.push('/');
             }
             else{
                 setMessage('Email or password incorrect !')
-                setAlert('error')
-                //test
             }
 
             })
-            .catch((err) => {
-                setAlert('error')
-    })
+            // .catch((err) => {
+            //     setMessage('Erreur !')
+            // })
         }
         else {
             setMessage('Fill empty fields !')
-            setAlert('error')
         }
 
    
@@ -86,27 +84,11 @@ const Index = () => {
             </div>
          </div>
 
-        {/* {alert=='success' &&
-            <div className='flex justify-center pt-6'>
-            <Alert type='success'>
-                <div className='flex justify-between'>
-                   Login success ! <span onClick={()=> setAlert('')} className='cursor-pointer '>X</span>
-                </div>
-                
-            </Alert>
-            </div>
+         {message && 
+          <div className='p-2 w-3/4 mt-4 bg-red-600 rounded-md mx-auto text-center relative' >
+            {message} <span className='cursor-pointer absolute top-1 right-1 font-bold text-xl' onClick={() => setMessage('')}>X</span>
+          </div> 
         }
-
-        {alert=='error' &&
-            <div className='flex justify-center pt-6'>
-            <Alert type='error'>
-                <div className='flex justify-between'>
-                    {message} <span  onClick={()=> setAlert('')} className=' cursor-pointer'>X</span>
-                </div>
-                
-            </Alert>
-            </div>
-        } */}
         </div> 
 
     </div>

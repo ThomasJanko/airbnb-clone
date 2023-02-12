@@ -17,6 +17,6 @@ export default{
         // .then(res => { localStorage.setItem('Token', res.data.jwt)
         //  })
         // //  .then(() => this.setState({ redirection: true }))
-        .catch(err=>console.log(err))
+        // .catch(err=>console.log(err))
     }
 }

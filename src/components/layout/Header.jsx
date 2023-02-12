@@ -5,10 +5,12 @@ import { Search, GlobeAlt, ViewList, UserCircle } from "heroicons-react";
 import DatesPicker from '../utilities/DatesPicker'
 import Link from 'next/link'; 
 import GlobalContext from '../../context/GlobalContext';
+import AuthContext from '../../context/AuthContext';
 
 export default function Header() {
 
     const { search, handleSearch, setSearch } = useContext(GlobalContext);
+    const { currentUser, login } = useContext(AuthContext);
 
     const [select, setSelect] = useState(false)
     const [accountMenu, setAccountMenu] = useState(false)
@@ -17,6 +19,7 @@ export default function Header() {
     const refMenu = useRef(null);
 
   useEffect(() => {
+    console.log(currentUser)
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
         setSelect(false)
@@ -39,7 +42,7 @@ export default function Header() {
     }
     
   return (
-    <header className='fixed w-full top-0 z-50 bg-white shadow-md p-3  md:px-10'>
+    <header className='fixed w-full top-0 z-50 bg-white shadow-md p-3 md:px-10'>
         <div className='flex justify-between'>
         <div className='relative flex items-center my-auto cursor-pointer ml-10'>
           <Link href={'/'}>
@@ -59,7 +62,11 @@ export default function Header() {
 
             <div className='rounded-full flex border border-black p-1 mx-2 cursor-pointer hover:shadow-xl shadow-gray-400 mr-4' onClick={() => setAccountMenu(!accountMenu)} ref={refMenu}>
                 <ViewList className='mx-1 h-8'/>
-                <UserCircle className='mx-1 text-gray-500 h-8 w-8' />
+                {currentUser ? 
+                <img className='w-8 h-8 rounded-full' src={currentUser.avatar}  alt='account'/> 
+                  : 
+                  <UserCircle className='mx-1 text-gray-500 h-8 w-8' />
+                }
             </div>
             <div className='absolute right-14 top-16' ref={refMenu}>
             {accountMenu && 
@@ -67,9 +74,12 @@ export default function Header() {
                 <div className='flex flex-col border-b-2 pb-4 ml-2 '>
                   <Link href={'/auth/login'}><div className='font-semibold my-2'>Connexion</div></Link> 
                   <Link href={'/auth/register'}><div className='my-2'>Inscription</div></Link> 
+                 {currentUser && <Link href={'/auth/profil'}><div className='my-2'>Compte</div></Link> }
                 </div>
                 <div className='flex flex-col font-light ml-2'>
+                <Link href={'/places/addplace'}>
                   <span className='my-2'>Mettre mon logement sur Airbnb</span>
+                </Link>
                   <span className='my-2'>Créer une expérience</span>
                   <span className='my-2'>Aide</span>
                 </div>
