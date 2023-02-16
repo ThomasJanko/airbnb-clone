@@ -10,7 +10,7 @@ import AuthContext from '../../context/AuthContext';
 export default function Header() {
 
     const { search, handleSearch, setSearch } = useContext(GlobalContext);
-    const { currentUser, login } = useContext(AuthContext);
+    const { currentUser, login, logout } = useContext(AuthContext);
 
     const [select, setSelect] = useState(false)
     const [accountMenu, setAccountMenu] = useState(false)
@@ -36,6 +36,9 @@ export default function Header() {
 
  
 
+  const handleLogout = (e) => {
+        logout();  
+    }
   const handleSarchInput = (e) => {
         setSearch(e.target.value)  
     }
@@ -77,10 +80,11 @@ export default function Header() {
                 </div>
                 <div className='flex flex-col font-light ml-2'>
                 <Link href={'/places/addplace'}>
-                  <span className='my-2'>Mettre mon logement sur Airbnb</span>
+                  <div className='my-2'>Mettre mon logement sur Airbnb</div>
                 </Link>
                   <span className='my-2'>Créer une expérience</span>
-                  <span className='my-2'>Aide</span>
+                  <span className='my-2 border-b-2 pb-4'>Aide</span>
+                  {currentUser && <div className='my-2 cursor-pointer' onClick={() => handleLogout()}>Déconnexion</div>}
                 </div>
               </div>}
             </div>

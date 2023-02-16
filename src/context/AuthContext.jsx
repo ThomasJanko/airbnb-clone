@@ -19,6 +19,7 @@ export const AuthContextProvider = ({ children }) => {
     .then((u) => {
       setIsAuthenticated(true);
       setCurrentuser(u.data);
+      
     })
     .catch((error) => {})
   
@@ -27,6 +28,8 @@ export const AuthContextProvider = ({ children }) => {
   const logout = () => {
     setIsAuthenticated(false);
     setCurrentuser(null);
+    localStorage.removeItem('Auth')
+
   }
 
   const context = {
