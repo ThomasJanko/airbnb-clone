@@ -77,32 +77,11 @@ export default function Places() {
         <div className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 mt-44 justify-around cursor-pointer'>
             {list.length>0 ? list.map((place) => 
             <PlaceCard place={place}/>
-            // <div key={place._id} className='p-3' onClick={() => Router.push(`/places/${place._id}`)}>
-            //     <div className='rounded-xl' style={{height: '400px'}}>
-            //         <div>
-            //             {/* Allow all domain image in Next.config.js */}
-            //             {/* <Image src={place.image} alt={place.title} width={40} height={40} /> */}
-            //             <div className='relative'>
-            //                 <img className='object-cover h-72 block w-full border rounded-xl' src={place.image} alt={place.title} />
-            //                  <div className=' absolute top-4 right-4'><HeartOutline className='cursor-pointer text-white'/></div>
-            //             </div>
-            //             <div className='flex justify-between mt-2 ml-2'>
-            //                 <span className='font-semibold capitalize'>{place.title}, {place.Addresse && place.Addresse.city} </span>
-            //                 {/* Model PLace Ajouter Note */}
-            //                 <span className='flex'> <Star className='h-4 w-4 mt-1'/> 4.6</span>
-            //             </div>
-            //             <div className='ml-2 overflow-clip text-ellipsis capitalize-first' style={{color: '#717171'}}>{place.description} </div>
-            //             {/* Model Place Ajouter Plage date */}
-            //             <div className='ml-2 overflow-clip text-ellipsis' style={{color: '#717171'}}> 11 -17 aout </div>
-            //             <div className='mt-2 ml-2'> <span className='font-bold'>{place.pricePerDay} €</span>  /nuit </div>
-            //         </div>
-
-            //     </div>
-            // </div>
+           
             )
           :
           <div className='absolute text-2xl text-center mt-10' style={{width: '94%'}}>
-            <span className='mx-auto'> Aucune location disponible !</span>
+            <span className='mx-auto text-center'> Aucune location disponible !</span>
           </div>}
         </div>
         <div className='fixed bottom-20 w-full mx-auto z-50 whitespace-nowrap pointer-events-auto'>

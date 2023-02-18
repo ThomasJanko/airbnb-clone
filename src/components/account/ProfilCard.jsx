@@ -117,9 +117,9 @@ const ProfilCard = (props) => {
                     newUser.avatar = e.target.value;
                     setUser(newUser);
                   }}
-                  placeholder={user.avatar}
+                  placeholder={user.avatar? user.avatar : 'https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png'}
                   />
-                    <img className='w-12 h-12 object-cover mx-auto mt-2 rounded-md' src={user.avatar} alt="" />
+                    <img className='w-12 h-12 object-cover mx-auto mt-2 rounded-md' src={user.avatar? user.avatar : 'https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png'} alt="" />
               </div>
             </div>
             <button type="button" className='rounded mt-6 bg-green-600 absolute border py-1 px-2' onClick={()=> editUser()}>Valider</button>

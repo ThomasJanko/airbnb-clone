@@ -49,6 +49,7 @@ export const GlobalContextProvider = ({ children }) => {
     deleteWishlist,
     handleSearch,
     wishlist,
+    setWishlist,
     dates,
     setDates,
     search,
