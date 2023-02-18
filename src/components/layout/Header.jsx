@@ -64,7 +64,7 @@ export default function Header() {
 
             <div className='rounded-full flex border border-black p-1 mx-2 cursor-pointer hover:shadow-xl shadow-gray-400 mr-4' onClick={() => setAccountMenu(!accountMenu)} ref={refMenu}>
                 <ViewList className='mx-1 h-8'/>
-                {currentUser ? 
+                {currentUser?.avatar ? 
                 <img className='w-8 h-8 rounded-full' src={currentUser.avatar}  alt='account'/> 
                   : 
                   <UserCircle className='mx-1 text-gray-500 h-8 w-8' />
@@ -77,6 +77,7 @@ export default function Header() {
                   <Link href={'/auth/login'}><div className='font-semibold my-2'>Connexion</div></Link> 
                   <Link href={'/auth/register'}><div className='my-2'>Inscription</div></Link> 
                  {currentUser && <Link href={'/auth/profil'}><div className='my-2'>Compte</div></Link> }
+                 {currentUser && <Link href={'/auth/annonces'}><div className='my-2'>Mes annonces</div></Link> }
                 </div>
                 <div className='flex flex-col font-light ml-2'>
                 <Link href={'/places/addplace'}>
