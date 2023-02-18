@@ -12,60 +12,51 @@ export default function PlaceCard({place}) {
     // const {currentUser, wishlist, addPlaceWishlist, removePlaceWishlist, setWishlist } = useContext(GlobalContext)
     const [wishlist, setWishlist] = useState(JSON.parse(localStorage.getItem('wishlist')) || []);
 
-    const [favorites, setFavorites] = useState( []);
+    const [favorites, setFavorites] = useState([]);
     const router = useRouter()
 
-    useEffect(() => {
-        // get favorites from local storage or empty array
-        const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        setFavorites(storedFavorites);
-      }, []);
+    
     
     const isInWishlist = (place) => {
-        let fav = JSON.parse(localStorage.getItem('favorites'))
-        return fav?.some((item) => item == place._id);
+        // let fav = JSON.parse(localStorage.getItem('favorites'))
+        return favorites?.some((item) => item._id == place._id);
       };
    
-    const handleClick = (event, place) => {
+      const addToFavorites = (event, place) => {
+        console.log('add')
         event.stopPropagation();
+        // const newFavorites = [...favorites, place];
+        // setFavorites(newFavorites);
+        favorites.push(place);
+        // var cart = [];
+        // cart.push(place);
+        // localStorage.setItem('Cart', JSON.stringify(cart))
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+       
+      }
 
-        const id = place._id;
-        const index = favorites.indexOf(id);
-        
-    
-        // return if target doesn't have an id (shouldn't happen)
-        if (!id) return;
-    
-        // item is not favorite
-        if (index === -1) {
-          const newFavorites = [...favorites, place];
-          setFavorites(newFavorites);
-          // store array in local storage
-          localStorage.setItem('favorites', JSON.stringify(newFavorites));
-        } 
-        // item is already favorite
-        else {
-          const newFavorites = favorites.filter((favorite) => favorite !== id);
-          setFavorites(newFavorites);
-          // store array in local storage
-          localStorage.setItem('favorites', JSON.stringify(newFavorites));
-        }
-        // router.reload()
+      const removeFromFavorites = (event, place) => {
+        event.stopPropagation();
+        console.log('remove')
+        const updatedFavorites = favorites.filter((favoriteItem) => favoriteItem.id !== place.id);
+        setFavorites(updatedFavorites);
+        localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
       }
 
      
    
 
   return (
-    <div key={place._id} className='p-3' onClick={() => Router.push(`/places/${place._id}`)}>
+    <div key={place._id} className='p-3' onClick={() => Router.push(`/places/${place._id}`)}>   
                 <div className='rounded-xl' style={{height: '400px'}}>
+                  <div onClick={(event) => { event.stopPropagation(); console.log(favorites)}}>Console</div>
                     <div>
                         {/* Allow all domain image in Next.config.js */}
                         {/* <Image src={place.image} alt={place.title} width={40} height={40} /> */}
                         <div className='relative'>
                             <img className='object-cover h-72 block w-full border rounded-xl' src={place.image} alt={place.title} />
-                             {/* <div className=' absolute top-4 right-4'><HeartOutline fill={`${isInWishlist(place)? 'red' : 'transparent'}`} className='cursor-pointer  text-white' onClick={(event) => {isInWishlist(place)? removeFromFavorites(event, place) : addToFavorites(event, place)}}/></div> */}
-                             <div className=' absolute top-4 right-4'><HeartOutline fill={`${isInWishlist(place)? 'red' : 'transparent'}`} className='cursor-pointer  text-white' onClick={(event) => handleClick(event, place)}/></div>
+                             <div className=' absolute top-4 right-4'><HeartOutline fill={`${isInWishlist(place)? 'red' : 'transparent'}`} className='cursor-pointer  text-white' onClick={(event) => {isInWishlist(place)? removeFromFavorites(event, place) : addToFavorites(event, place)}}/></div>
+                             {/* <div className=' absolute top-4 right-4'><HeartOutline fill={`${isInWishlist(place)? 'red' : 'transparent'}`} className='cursor-pointer  text-white' onClick={(event) => handleClick(event, place)}/></div> */}
                         </div>
                         <div className='flex justify-between mt-2 ml-2'>
                             <span className='font-semibold capitalize'>{place.title}, {place.Addresse && place.Addresse.city} </span>
