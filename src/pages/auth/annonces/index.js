@@ -29,8 +29,11 @@ const Index = () => {
            </div>
             <div className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 justify-around cursor-pointer'>
         
-            {places?.length>0 ? places.map((place) => 
-            <PlaceCard place={place}/>
+            {places?.length>0 ? places.map((place) =>
+            <div key={place._id}>
+               <PlaceCard place={place} />  
+            </div>
+           
             )
           :
           <div className='absolute text-2xl text-center mt-10' style={{width: '94%'}}>

@@ -20,6 +20,13 @@ export const GlobalContextProvider = ({ children }) => {
   const [filterPrice, setFilterPrice] = useState({min: 0, max: 9999})
   const [filterCapacity, setFilterCapacity] = useState({min: 0, max: 100})
 
+  useEffect(() => {
+    let wish = JSON.parse(localStorage.getItem('favorites'))
+      if(wish){
+       setWishlist(wish)
+      }
+  }, []);
+
   const handleSearch = (input) =>{
       setSearch(input);
       console.log(input)

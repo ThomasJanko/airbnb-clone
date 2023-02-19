@@ -76,12 +76,14 @@ export default function Places() {
         
         <div className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 mt-44 justify-around cursor-pointer'>
             {list.length>0 ? list.map((place) => 
-            <PlaceCard place={place}/>
-           
+            <div key={place._id}>
+              <PlaceCard place={place}/>
+            </div>
+            
             )
           :
           <div className='absolute text-2xl text-center mt-10' style={{width: '94%'}}>
-            <span className='mx-auto text-center'> Aucune location disponible !</span>
+            <span className='mx-auto'> Aucune location disponible !</span>
           </div>}
         </div>
         <div className='fixed bottom-20 w-full mx-auto z-50 whitespace-nowrap pointer-events-auto'>
