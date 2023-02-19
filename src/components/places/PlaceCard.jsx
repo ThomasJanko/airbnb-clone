@@ -4,20 +4,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Router from 'next/router';
 import GlobalContext from '../../context/GlobalContext';
-import { useRouter } from 'next/router';
 
 
 export default function PlaceCard({place}) {
 
-    const {currentUser, wishlist, addPlaceWishlist, removePlaceWishlist, setWishlist } = useContext(GlobalContext)
-    // const [wishlist, setWishlist] = useState(JSON.parse(localStorage.getItem('wishlist')) || []);
+    const { wishlist, setWishlist } = useContext(GlobalContext)
 
     const [favorites, setFavorites] = useState([]);
-    const router = useRouter()
 
-    useEffect(() => {
-      // setWishlist(JSON.parse(localStorage.getItem('favorites')) || [])
-    }, []);
 
     useEffect(() => {
       setFavorites(wishlist)
@@ -25,12 +19,10 @@ export default function PlaceCard({place}) {
     }, [wishlist]);
     
     const isInWishlist = (place) => {
-        // let fav = JSON.parse(localStorage.getItem('favorites'))
          return favorites?.some((item) => item._id == place._id)
       };
    
       const addToFavorites = (event, place) => {
-        console.log('add')
         event.stopPropagation();
         const newFavorites = [...wishlist, place];
         setWishlist(newFavorites);
@@ -40,9 +32,7 @@ export default function PlaceCard({place}) {
 
       const removeFromFavorites = (event, place) => {
         event.stopPropagation();
-        console.log('remove')
         const updatedFavorites = wishlist.filter((favoriteItem) => favoriteItem._id !== place._id);
-        console.log(updatedFavorites)
         setWishlist(updatedFavorites);
         localStorage.setItem('favorites', JSON.stringify(wishlist));
       }
@@ -53,7 +43,6 @@ export default function PlaceCard({place}) {
   return (
     <div  className='p-3' onClick={() => Router.push(`/places/${place._id}`)}>   
                 <div className='rounded-xl' style={{height: '400px'}}>
-                  <div onClick={(event) => { event.stopPropagation(); console.log(wishlist)}}>Console</div>
                     <div>
                         {/* Allow all domain image in Next.config.js */}
                         {/* <Image src={place.image} alt={place.title} width={40} height={40} /> */}

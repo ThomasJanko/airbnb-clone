@@ -11,7 +11,7 @@ const Home: NextPage = () => {
     <div className=" min-h-screen flex-col items-center justify-center py-2">
       <Head>
         <title>AirbBnb</title>
-        <link rel="icon" href="/assets/airBnbLogo.png" />
+        <link rel="icon" href="https://cdn.freebiesupply.com/logos/large/2x/airbnb-2-logo-png-transparent.png" />
       </Head>
 
     <Header/>

@@ -36,24 +36,7 @@ export const GlobalContextProvider = ({ children }) => {
     setDate(date)
   }
 
-  const removePlaceWishlist = (id) => {
-    // ....
-  }
-  
-  const addPlaceWishlist = (place) => {
-    console.log(place);
-    setWishlist([...wishlist, place])
-    // ...
-  }
-
-  const deleteWishlist = () => {
-    setWishlist([])
-  }
-
   const context = {
-    removePlaceWishlist,
-    addPlaceWishlist,
-    deleteWishlist,
     handleSearch,
     wishlist,
     setWishlist,
