@@ -27,11 +27,17 @@ const Index = () => {
     const handleDelete = (event, place) => {
         event.stopPropagation();
         setDeleteDialog(true); 
-        setPlaceToDelete(place)
+        setPlaceToDelete(place._id)
     }
     const deletePlace = () => {
         console.log(placeToDelete)
         setDeleteDialog(false);
+
+        // Place.detele(placeToDelete)
+        // .then((res) => {
+
+        // })
+        // .catch((err) => {});
     }
 
     return (
