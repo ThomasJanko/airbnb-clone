@@ -5,12 +5,13 @@ import PlaceService from '../../../public/services/places.service'
 import { ShareOutline, HeartOutline, Star, Translate, LocationMarkerOutline, CalendarOutline, ChevronDown } from "heroicons-react";
 import DatesPicker from '../../../components/utilities/DatesPicker'
 import GlobalContext from '../../../context/GlobalContext';
+import AuthContext from '../../../context/AuthContext';
 
 const gradient = "linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%)";
 
 const index = () => {
 
-
+  const  {currentUser}  = useContext(AuthContext);
   const { dates } = useContext(GlobalContext);
 
   const router = useRouter();
@@ -104,7 +105,7 @@ async function fetchData() {
                       <span> {place.capacity && place.capacity} voyageurs · 1 chambre · 2 lits · 1 salle de bain</span>
                     </div>
                     <div className=' align-middle items-center'>
-                      <img className='rounded-full h-14 w-14 object-cover ' width={60} height={60} src="https://a0.muscache.com/im/pictures/user/f8f6ecdd-c65a-4d0c-ace4-0f3f8c337209.jpg?im_w=240" alt="hote avatar"/>
+                      <img className='rounded-full h-14 w-14 object-cover' src={currentUser.avatar? currentUser.avatar :'https://a0.muscache.com/im/pictures/user/f8f6ecdd-c65a-4d0c-ace4-0f3f8c337209.jpg?im_w=240'} alt="hote avatar"/>
                     </div>
                   </div>
 

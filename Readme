@@ -1,14 +1,10 @@
 Compte - Propriétaire (owner) :
 
-
-<!-- > Consulter et modifier mon profil -->
-> Consulter uniquement ses annonces
 > Modifier, supprimer une annonce
 > Consulter les demandes de réservation pour chaque annonce
 > Accepter ou refuser une demande de réservation
 
 Compte - Loueur (customer) :
-<!-- > Consulter et modifier mon profil -->
 > je peux faire une demande de réservation pour un lieu en renseignant une date de début et de fin
 > Ajouter des lieux dans sa liste de favoris
 
