@@ -6,6 +6,8 @@ import AuthContext from '../../../context/AuthContext';
 import GlobalContext from '../../../context/GlobalContext';
 import PlaceCard from '../../../components/places/PlaceCard';
 import { Trash } from "heroicons-react";
+import placesService from '../../../public/services/places.service';
+import { useRouter } from 'next/router';
 
 
 const Index = () => {
@@ -18,6 +20,8 @@ const Index = () => {
     const [list, setList] = useState([])
     const [places, setPlaces] = useState([])
 
+    const router = useRouter()
+
     useEffect(() => {
         if(currentUser){
             setPlaces(currentUser?.currentUser?.places)
@@ -27,10 +31,16 @@ const Index = () => {
     const handleDelete = (event, place) => {
         event.stopPropagation();
         setDeleteDialog(true); 
-        setPlaceToDelete(place._id)
+        setPlaceToDelete(place)
     }
     const deletePlace = () => {
         console.log(placeToDelete)
+        let jwt = JSON.parse(localStorage.getItem('Auth'))
+        placesService.deletePlace(placeToDelete, jwt)
+        .then((res) => {
+            router.reload()
+        })
+        .catch((err) => {});
         setDeleteDialog(false);
 
         // Place.detele(placeToDelete)
@@ -63,9 +73,9 @@ const Index = () => {
             <span className='mx-auto'> Aucune location disponible !</span>
           </div>}
           {deleteDialog && 
-            <div className='absolute top-1/2 w-full transition-opacity'>
-                <div className='mx-auto w-1/3 bg-primary p-2 rounded-md'>
-                   <span className='ml-2 mt-2'>Etes vous sur de vouloir supprimer cette annonce?</span>
+            <div className='absolute top-1/3 w-full transition-opacity'>
+                <div className='mx-auto w-1/3 backdrop-filter backdrop-blur-md bg-opacity-25 p-2 font-semibold rounded-md text-xl border-primary border'>
+                   <div className='ml-2 mt-2'>Etes-vous sûr de vouloir supprimer l'annonce "<span className='text-primary'>{placeToDelete?.title}</span>"?</div>
                    <div className='flex justify-between p-2'>
                    <button className='p-2  rounded-md hover:text-white' onClick={deletePlace}>Valider</button>
                    <button className='p-2 hover:text-white rounded-md' onClick={() => {setDeleteDialog(false); setPlaceToDelete(null)}}>Annuler</button> 

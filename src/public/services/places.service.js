@@ -20,13 +20,20 @@ export default{
         .then(res=>res)
         .catch(err=>console.log(err))
     },
-    getMyPlaces(jwt){
-       return axios.get(`${URL}/place/places`)
+    
+    getPlace(id){
+       return axios.get(`${URL}/place/place/${id}`)
         .then(res=>res)
         .catch(err=>console.log(err))
     },
-    getPlace(id){
-       return axios.get(`${URL}/place/place/${id}`)
+    deletePlace(form, jwt){
+        console.log(form)
+        const config = {
+            headers: {
+              authorization: jwt,
+            },
+          };
+       return axios.post(`${URL}/place/deletePlace`,form, config)
         .then(res=>res)
         .catch(err=>console.log(err))
     }
