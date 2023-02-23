@@ -1,6 +1,5 @@
 Compte - Propriétaire (owner) :
 
-> Modifier, supprimer une annonce
 > Consulter les demandes de réservation pour chaque annonce
 > Accepter ou refuser une demande de réservation
 
@@ -10,7 +9,6 @@ Compte - Loueur (customer) :
 
 Back office :
 > Prévoir un back office pour les utilisateurs de type admin
-> Je peux consulter la liste de tous les utilisateurs
 > Je peux consulter toutes les demandes de réservation
 
 Bonus :

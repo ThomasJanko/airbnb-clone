@@ -60,8 +60,11 @@ export default function Header() {
            <Link href={'/places/addplace'}>
             <button className='mx-2 cursor-pointer p-1 rounded-full hover:bg-opacity-20 hover:bg-gray-300 h-8 text-ellipsis overflow-hidden'>Mettre mon logement sur Airbnb  {/* ||Mode hôte */}</button> 
            </Link>
-            <button className='mx-2 p-1 cursor-pointer rounded-full hover:bg-opacity-20 hover:bg-gray-300'> <GlobeAlt /></button>
-
+           {currentUser?.isAdmin && 
+           <Link href={'/admin/users'}>
+            <button className='mx-2 p-1 cursor-pointer rounded-full hover:bg-opacity-20 hover:bg-gray-300' > <GlobeAlt /></button>
+           </Link>
+           }
             <div className='rounded-full flex border border-black p-1 mx-2 cursor-pointer hover:shadow-xl shadow-gray-400 mr-4' onClick={() => setAccountMenu(!accountMenu)} ref={refMenu}>
                 <ViewList className='mx-1 h-8'/>
                 {currentUser?.avatar ? 
