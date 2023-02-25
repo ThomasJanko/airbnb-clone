@@ -14,6 +14,7 @@ const Index = () => {
 
     const currentUser = useContext(AuthContext)
     const {search, category, filterPrice, filterCapacity} = useContext(GlobalContext)
+
     const [deleteDialog, setDeleteDialog] = useState(false)
     const [placeToDelete, setPlaceToDelete] = useState(null)
 
@@ -23,10 +24,17 @@ const Index = () => {
     const router = useRouter()
 
     useEffect(() => {
-        if(currentUser){
-            setPlaces(currentUser?.currentUser?.places)
-        }
+        const fetchCurrentUserPlaces = async () => {
+            let p = await currentUser?.currentUser?.places;
+            if (p) {
+              setPlaces(p);
+              setList(p);
+            }
+          };
+      
+          fetchCurrentUserPlaces();
     }, [currentUser]);
+
 
     const handleDelete = (event, place) => {
         event.stopPropagation();
@@ -43,12 +51,36 @@ const Index = () => {
         .catch((err) => {});
         setDeleteDialog(false);
 
-        // Place.detele(placeToDelete)
-        // .then((res) => {
-
-        // })
-        // .catch((err) => {});
     }
+
+    useEffect(() => {
+        let filteredPlaces = places;
+        if (category !== 'Tous') {
+          filteredPlaces.forEach((place) => {
+            place.type.forEach((type) => {
+              if (!type.toLowerCase().includes(category.toLowerCase())) {
+                console.log(type)
+                filteredPlaces = filteredPlaces.filter(p => p !== place);
+              }
+            });
+          });
+        }
+       
+        filteredPlaces = filteredPlaces.filter(place =>
+        place.title.toLowerCase().includes(search.toLowerCase()) ||
+        place.description.toLowerCase().includes(search.toLowerCase())
+        );
+  
+        filteredPlaces = filteredPlaces.filter(place =>
+          place.pricePerDay >= filterPrice.min && place.pricePerDay <= filterPrice.max
+        );
+  
+        filteredPlaces = filteredPlaces.filter(place =>
+          place.capacity >= filterCapacity.min && place.capacity <= filterCapacity.max
+        );
+  
+        setList(filteredPlaces);
+        }, [search, category, filterPrice, filterCapacity]);
 
     return (
         <>
@@ -59,7 +91,7 @@ const Index = () => {
            </div>
             <div className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 justify-around cursor-pointer'>
         
-            {places?.length>0 ? places.map((place) =>
+            {list?.length>0 ? list.map((place) =>
             <div key={place._id} className='relative'>
                <PlaceCard place={place} />
                <div className='absolute right-2 bottom-4 hover:text-red-600' onClick={(e) => handleDelete(e, place)}>
@@ -77,8 +109,8 @@ const Index = () => {
                 <div className='mx-auto w-1/3 backdrop-filter backdrop-blur-md bg-opacity-25 p-2 font-semibold rounded-md text-xl border-primary border'>
                    <div className='ml-2 mt-2'>Etes-vous sûr de vouloir supprimer l'annonce "<span className='text-primary'>{placeToDelete?.title}</span>"?</div>
                    <div className='flex justify-between p-2'>
-                   <button className='p-2  rounded-md hover:text-white' onClick={deletePlace}>Valider</button>
-                   <button className='p-2 hover:text-white rounded-md' onClick={() => {setDeleteDialog(false); setPlaceToDelete(null)}}>Annuler</button> 
+                   <button className='p-2  rounded-md hover:text-green-500' onClick={deletePlace}>Valider</button>
+                   <button className='p-2 hover:text-red-600 rounded-md' onClick={() => {setDeleteDialog(false); setPlaceToDelete(null)}}>Annuler</button> 
                    </div>
                  
                 </div>
