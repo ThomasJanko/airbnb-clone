@@ -56,9 +56,9 @@ export default function PlaceCard({place}) {
                             {/* Model PLace Ajouter Note */}
                             <span className='flex'> <Star className='h-4 w-4 mt-1'/> 4.6</span>
                         </div>
-                        <div className='ml-2 overflow-clip text-ellipsis capitalize-first' style={{color: '#717171'}}>{place.description} </div>
+                        <div className='ml-2 overflow-y-clip text-ellipsis capitalize-first truncate' style={{color: '#717171'}}>{place.description} </div>
                         {/* Model Place Ajouter Plage date */}
-                        <div className='ml-2 overflow-clip text-ellipsis' style={{color: '#717171'}}> 11 -17 aout </div>
+                        <div className='ml-2 overflow-clip text-ellipsis ' style={{color: '#717171'}}> 11 -17 aout </div>
                         <div className='mt-2 ml-2'> <span className='font-bold'>{place.pricePerDay} €</span>  /nuit </div>
                     </div>
 

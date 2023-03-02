@@ -4,8 +4,13 @@ const URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export default{
     
-    getUsers(){
-       return axios.get(`${URL}/user/users`)
+    getUsers(jwt){
+      const config = {
+        headers: {
+          authorization: jwt,
+        },
+      };
+       return axios.get(`${URL}/user/users`, config)
         .then(res=>res)
         .catch(err=>console.log(err))
     },
