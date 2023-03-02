@@ -1,13 +1,13 @@
+Clone AirBnb réalisé par [JANKOWSKi Thomas]()
+
+# Fonctionnalités non réalisées dans ce projet:
+
 Compte - Propriétaire (owner) :
-
-> Consulter les demandes de réservation pour chaque annonce
 > Accepter ou refuser une demande de réservation
-
-Compte - Loueur (customer) :
-
-Back office :
+> Modidfier une annonce
 
 Bonus :
 > Option d’affichage des annonces sur une google map
 > Paiement (stripe ? )
+> Utilisation de graphql
 > Email de notification : reset password, confirmation de réservation etc…
