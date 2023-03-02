@@ -81,11 +81,12 @@ export default function Header() {
                   <Link href={'/auth/register'}><div className='my-2'>Inscription</div></Link> 
                  {currentUser && <Link href={'/auth/profil'}><div className='my-2'>Compte</div></Link> }
                  {currentUser && <Link href={'/auth/annonces'}><div className='my-2'>Mes annonces</div></Link> }
+                 {currentUser && <Link href={'/auth/reservations'}><div className='my-2'>Mes réservations</div></Link> }
                 </div>
                 <div className='flex flex-col font-light ml-2'>
-                {currentUser && <Link href={'/reservation'}>
-                  <div className='my-2 cursor-pointer'>Mes réservations</div>
-                </Link>}
+                {/* {currentUser && <Link href={'/reservation'}>
+                  <div className='my-2 cursor-pointer'>Mes demandes de réservations</div>
+                </Link>} */}
 
                 <Link href={'/places/addplace'}>
                   <div className='my-2 cursor-pointer'>Mettre mon logement sur Airbnb</div>
