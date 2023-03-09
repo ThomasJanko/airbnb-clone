@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import userService from '../../../public/services/users.service'
-import Header from '../../../components/layout/Header'
+import userService from '../../public/services/users.service'
+import Header from '../../components/layout/Header'
+import reservationService from '../../public/services/reservation.service';
+import ReservationCard from '../../components/reservations/reservationCard';
 
 const Index = () => {
 
@@ -8,15 +10,29 @@ const Index = () => {
     const [error, setError] = useState();
 
     const [users, setUsers] = useState([])
+    const [reservations, setReservations] = useState([])
 
     useEffect(() => {
-        fetchData();
+        fetchUsers();
+        fetchReservations();
     }, []);
 
-    async function fetchData() {
+    async function fetchUsers() {
+      let jwt = JSON.parse(localStorage.getItem('Auth'))
         try {
-          const response = await userService.getUsers();
+          const response = await userService.getUsers(jwt);
           setUsers(response.data);
+        } catch (error) {
+          setError(error);
+        } finally {
+          setLoading(false);
+        }
+      }
+      async function fetchReservations() {
+        let jwt = JSON.parse(localStorage.getItem('Auth'))
+        try {
+          const response = await reservationService.getReservations(jwt);
+          setReservations(response.data);
         } catch (error) {
           setError(error);
         } finally {
@@ -35,7 +51,9 @@ const Index = () => {
     return (
         <div className='w-full'>
             <Header/>
-            <div className='mx-auto xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-5/6 mt-40'>
+            <div className='mx-auto flex justify-evenly mt-40'>
+            {/* xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-5/6 */}
+              <div className='overflow-y-auto p-4' style={{height: '800px'}}>
                 <div className='text-center text-2xl font-semibold '>Liste des Utilisateurs:</div>
                 <div>
                     {users?.map((user) => 
@@ -67,6 +85,18 @@ const Index = () => {
                     </div>
                     )}
                 </div>
+              </div>
+
+              <div>
+              <div className='text-center text-2xl font-semibold '>Liste des Reservations:</div>
+              <div  className='overflow-y-auto p-4' style={{height: '800px'}}>
+                {reservations?.map((reservation) => 
+                <div key={reservation._id} className="mt-4">
+                    <ReservationCard reservation={reservation}/>
+                </div>
+                )}
+                </div>
+              </div>
             </div>
         </div>
     );

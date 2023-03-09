@@ -61,7 +61,7 @@ export default function Header() {
             <button className='mx-2 cursor-pointer p-1 rounded-full hover:bg-opacity-20 hover:bg-gray-300 h-8 text-ellipsis overflow-hidden'>Mettre mon logement sur Airbnb  {/* ||Mode hôte */}</button> 
            </Link>
            {currentUser?.isAdmin && 
-           <Link href={'/admin/users'}>
+           <Link href={'/admin'}>
             <button className='mx-2 p-1 cursor-pointer rounded-full hover:bg-opacity-20 hover:bg-gray-300' > <GlobeAlt /></button>
            </Link>
            }
@@ -81,12 +81,19 @@ export default function Header() {
                   <Link href={'/auth/register'}><div className='my-2'>Inscription</div></Link> 
                  {currentUser && <Link href={'/auth/profil'}><div className='my-2'>Compte</div></Link> }
                  {currentUser && <Link href={'/auth/annonces'}><div className='my-2'>Mes annonces</div></Link> }
+                 {currentUser && <Link href={'/auth/reservations'}><div className='my-2'>Mes réservations</div></Link> }
                 </div>
                 <div className='flex flex-col font-light ml-2'>
+                {/* {currentUser && <Link href={'/reservation'}>
+                  <div className='my-2 cursor-pointer'>Mes demandes de réservations</div>
+                </Link>} */}
+
                 <Link href={'/places/addplace'}>
-                  <div className='my-2'>Mettre mon logement sur Airbnb</div>
+                  <div className='my-2 cursor-pointer'>Mettre mon logement sur Airbnb</div>
                 </Link>
-                  <span className='my-2'>Créer une expérience</span>
+                <Link href={'/places/addplace'}>
+                  <span className='my-2 cursor-pointer'>Créer une expérience</span>
+                </Link>
                   <span className='my-2 border-b-2 pb-4'>Aide</span>
                   {currentUser && <div className='my-2 cursor-pointer' onClick={() => handleLogout()}>Déconnexion</div>}
                 </div>

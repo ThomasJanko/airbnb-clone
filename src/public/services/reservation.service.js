@@ -14,6 +14,16 @@ export default{
         .then(res=>res)
         .catch(err=>err)
     },
+    getReservations(jwt){
+        const config = {
+            headers: {
+              authorization: jwt,
+            },
+          };
+       return axios.get(`${URL}/reservation/reservations`, config)
+        .then(res=>res)
+        .catch(err=>err)
+    },
 
    
      

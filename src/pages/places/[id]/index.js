@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import Header from '../../../components/layout/Header'
 import { useRouter } from 'next/router';
 import PlaceService from '../../../public/services/places.service'
+import ReservationService from '../../../public/services/reservation.service'
 import { ShareOutline, HeartOutline, Star, Translate, LocationMarkerOutline, CalendarOutline, ChevronDown } from "heroicons-react";
 import DatesPicker from '../../../components/utilities/DatesPicker'
 import GlobalContext from '../../../context/GlobalContext';
@@ -66,6 +67,25 @@ async function fetchData() {
       return <p>Error: Not able to load this place</p>;
     }
 
+
+    const handleReservation = () =>{
+      let jwt = JSON.parse(localStorage.getItem('Auth'))
+
+      let reservation = {
+        title: place.title,
+        placeId: place._id,
+        ownerId: currentUser._id,
+        nbOfNights: dates.nbNights,
+        totalPrice: place.pricePerDay * dates.nbNights + 122,
+        dates: `${dates.startDate} - ${dates.endDate}`
+      }
+      console.warn(reservation)
+
+      ReservationService.addReservation(reservation, jwt)
+      .then((res) => {router.push('/')})
+      .catch((err) => {})
+    }
+
   return (
     <div>
         <Header/>
@@ -101,11 +121,11 @@ async function fetchData() {
                   
                   <div className='mt-6 flex justify-between border-b-2 pb-8' >
                     <div className='flex flex-col'>
-                      <span className='font-semibold text-2xl'>{place.description} </span>
+                      <span className=' ml-2 font-semibold text-2xl max-w-md'>{place.description} </span>
                       <span> {place.capacity && place.capacity} voyageurs · 1 chambre · 2 lits · 1 salle de bain</span>
                     </div>
                     <div className=' align-middle items-center'>
-                      <img className='rounded-full h-14 w-14 object-cover' src={currentUser.avatar? currentUser.avatar :'https://a0.muscache.com/im/pictures/user/f8f6ecdd-c65a-4d0c-ace4-0f3f8c337209.jpg?im_w=240'} alt="hote avatar"/>
+                      <img className='rounded-full h-14 w-14 object-cover' src={place.owner?.avatar? place.owner.avatar :'https://a0.muscache.com/im/pictures/user/f8f6ecdd-c65a-4d0c-ace4-0f3f8c337209.jpg?im_w=240'} alt="hote avatar"/>
                     </div>
                   </div>
 
@@ -170,7 +190,7 @@ async function fetchData() {
 
                   </div>
 
-                  <button className='mt-4 w-full rounded-md h-12 reservation' style={{background: gradient}} type="text" >Réserver</button>
+                  <button className='mt-4 w-full rounded-md h-12 reservation' style={{background: gradient}} type="text" onClick={handleReservation} >Réserver</button>
                 
                   <div className='opacity-90 text-center mt-2'>Aucun montant ne vous sera débité pour le moment</div>
 
