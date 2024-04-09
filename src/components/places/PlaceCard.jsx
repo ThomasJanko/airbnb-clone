@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Star, HeartOutline, Map } from "heroicons-react";
-import Image from 'next/image';
-import Link from 'next/link';
-import Router from 'next/router';
 import GlobalContext from '../../context/GlobalContext';
+import { useRouter } from 'next/router';
 
 
 export default function PlaceCard({place}) {
@@ -11,6 +9,7 @@ export default function PlaceCard({place}) {
     const { wishlist, setWishlist } = useContext(GlobalContext)
 
     const [favorites, setFavorites] = useState([]);
+    const router = useRouter();
 
 
     useEffect(() => {
@@ -41,7 +40,7 @@ export default function PlaceCard({place}) {
    
 
   return (
-    <div  className='p-3' onClick={() => Router.push(`/places/${place._id}`)}>   
+    <div  className='p-3' onClick={() => router.push(`/places/${place._id}`)}>   
                 <div className='rounded-xl' style={{height: '400px'}}>
                     <div>
                         {/* Allow all domain image in Next.config.js */}
