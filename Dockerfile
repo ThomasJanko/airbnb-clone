@@ -1,14 +1,17 @@
 # Dockerfile
 
 FROM node:18.19.0
+# RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
-COPY package.json /app
+COPY package.json package-lock.json ./
 
 RUN npm install
 
-COPY . /app
+COPY . .
+
+RUN npm run build
 
 EXPOSE 3000
 
